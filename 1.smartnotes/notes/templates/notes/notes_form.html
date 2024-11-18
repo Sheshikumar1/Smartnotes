@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" action="{% if object %}{% url 'notes.update' object.pk %}{% else %}{% url 'notes.new' %}{% endif %}">
+   {% csrf_token %}
+   {{ form.as_p }}
+   <button type="submit">{% if object %}Update Note{% else %}Create Note{% endif %}</button>
+</form>
+
+{% if form.errors %}
+   <div class="alert alert-danger my-5 custom-error">
+      {{ form.errors }}
+   </div>
+{% endif %}
+{% endblock %}
